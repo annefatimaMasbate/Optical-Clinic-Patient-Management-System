@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Roylyn E. Asuncion Optical Clinic System</title>
+        
+        <!-- CSS STYLING FOR A CLEAN & PROFESSIONAL LOOK -->
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                background-color: #EFEFEF;
+                margin: 20px;
+                color: #333333;
+            }
+            header {
+                background-color: #006647;
+                color: #FFFFFF;
+                padding: 15px;
+                border-radius: 8px;
+                text-align: center;
+            }
+            .nav-container {
+                background-color: #FFFFFF;
+                padding: 10px;
+                border-radius: 8px;
+                margin-top: 15px;
+                margin-bottom: 15px;
+                text-align: center;
+                box-shadow: 0px 2px 5px rgba(0,0,0,0.1);
+            }
+            .btn {
+                background-color: #00664d;
+                color: white;
+                padding: 10px 15px;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                font-weight: bold;
+                margin: 3px;
+            }
+            .btn:hover {
+                background-color: #00a584;
+            }
+            .btn-danger {
+                background-color: #CC0000;
+            }
+            .btn-danger:hover {
+                background-color: #FF0000;
+            }
+            .btn-edit {
+                background-color: #E67E22;
+            }
+            .btn-edit:hover {
+                background-color: #D35400;
+            }
+            section {
+                background-color: #FFFFFF;
+                padding: 20px;
+                border-radius: 8px;
+                box-shadow: 0px 2px 5px rgba(0,0,0,0.1);
+                margin-bottom: 20px;
+            }
+            input[type="text"], input[type="number"], input[type="date"], select, textarea {
+                width: 100%;
+                padding: 8px;
+                margin-top: 5px;
+                margin-bottom: 5px;
+                border: 1px solid #CCCCCC;
+                border-radius: 4px;
+                box-sizing: border-box;
+            }
+            table {
+                width: 100%;
+                border-collapse: collapse;
+                margin-top: 15px;
+                background-color: #FFFFFF;
+            }
+            th, td {
+                border: 1px solid #DDDDDD;
+                padding: 10px;
+                text-align: left;
+                vertical-align: top;
+            }
+            th {
+                background-color: #006650;
+                color: white;
+            }
+            tr:nth-child(even) {
+                background-color: #F9F9F9;
+            }
+            .dashboard-box {
+                background-color: #E6F2FF;
+                border-left: 5px solid #003366;
+                padding: 15px;
+                margin-bottom: 15px;
+                border-radius: 4px;
+            }
+
+            /* CARD GRID LAYOUT MATCHING DESIGN */
+            .form-grid-3 {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 15px;
+                text-align: left;
+                margin-bottom: 15px;
+            }
+            .form-grid-4 {
+                display: grid;
+                grid-template-columns: repeat(4, 1fr);
+                gap: 15px;
+                text-align: left;
+                margin-bottom: 15px;
+            }
+            .form-card {
+                border: 1px solid #E0E0E0;
+                border-radius: 6px;
+                padding: 12px;
+                background-color: #FAFAFA;
+                box-sizing: border-box;
+            }
+            .form-card p {
+                font-size: 12px;
+                font-weight: bold;
+                color: #555;
+                margin: 0 0 5px 0;
+            }
+            .grid-span-2 {
+                grid-column: span 2;
+            }
+            .action-btn-container {
+                text-align: right;
+                margin-top: 15px;
+            }
+            .service-input-grid {
+                display: flex;
+                gap: 15px;
+                align-items: flex-end;
+                margin-bottom: 20px;
+            }
+            .service-input-grid .form-card {
+                flex: 1;
+            }
+        </style>
+    </head>
+    <body>
+
+        <!-- HEADER SECTION -->
+        <header>
+            <h1>Roylyn E. Asuncion Optical Clinic Patient Management System</h1>
+            <p>19A Luna St., Malinao, Pasig City | Patient Management & Clinic Operations</p>
+        </header>
+
+        <!-- SYSTEM NAVIGATION BUTTONS -->
+        <div class="nav-container">
+            <input type="button" class="btn" value="Services Offered" onclick="showSection('serviceSection')">
+            <input type="button" class="btn" value="Patient Information" onclick="showSection('patientSection')">
+            <input type="button" class="btn" value="Consultation & Billing" onclick="showSection('consultSection')">
+            <input type="button" class="btn" value="Patient Records" onclick="showSection('recordsSection')">
+        </div>
+
+        <!-- 1. PATIENT MANAGEMENT SECTION -->
+        <section id="patientSection">
+            <center><h2>Patient Information</h2></center>
+            <hr>
+            <br>
+            <form id="patientForm">
+                <div class="form-grid-3">
+                    <div class="form-card">
+                        <p>Patient ID</p>
+                        <input type="text" id="pId" placeholder="e.g. PAT-101" required>
+                    </div>
+                    <div class="form-card">
+                        <p>Full Name</p>
+                        <input type="text" id="pName" placeholder="Juan Dela Cruz" required>
+                    </div>
+                    <div class="form-card">
+                        <p>Age</p>
+                        <input type="number" id="pAge" min="1" max="120" required>
+                    </div>
+                    <div class="form-card">
+                        <p>Gender</p>
+                        <select id="pGender">
+                            <option value="">--Select Gender--</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                        </select>
+                    </div>
+                    <div class="form-card">
+                        <p>Contact Number</p>
+                        <input type="text" id="pContact" placeholder="09123456789" required>
+                    </div>
+                    <div class="form-card">
+                        <p>Senior / PWD ID (If applicable)</p>
+                        <input type="text" id="pPwd" placeholder="N/A">
+                    </div>
+                    <div class="form-card grid-span-2">
+                        <p>Address</p>
+                        <input type="text" id="pAddress" placeholder="Enter Full Address">
+                    </div>
+                    <div class="action-btn-container" style="align-self: flex-end;">
+                        <input type="button" class="btn" value="Save Patient Records" onclick="savePatient()" style="padding: 12px 20px; font-size: 14px;">
+                    </div>
+                </div>
+            </form>
+        </section>
+
+        <!-- 2. SERVICES SECTION -->
+        <section id="serviceSection" style="display:none;">
+            <center><h2>Medical Services Offered</h2></center>
+            <hr>
+            <br>
+            <form>
+                <div class="service-input-grid">
+                    <div class="form-card">
+                        <p>Service Name:</p>
+                        <input type="text" id="sName" placeholder="e.g. Eye Check-up">
+                    </div>
+                    <div class="form-card">
+                        <p>Fixed Cost: (PHP)</p>
+                        <input type="number" id="sCost" placeholder="0.00">
+                    </div>
+                    <div>
+                        <input type="button" class="btn" value="Add New Service" onclick="addService()" style="padding: 10px 18px;">
+                    </div>
+                </div>
+            </form>
+            <h3>Service List</h3>
+            <p id="serviceOutput"></p>
+        </section>
+
+        <!-- 3. CONSULTATION & BILLING SECTION -->
+        <section id="consultSection" style="display:none;">
+            <center><h2>Consultation & Billing</h2></center>
+            <hr>
+            <br>
+            <form>
+                <!-- Row 1 -->
+                <div class="form-grid-4">
+                    <div class="form-card">
+                        <p>Select Patient:</p>
+                        <select id="selectPatient">
+                            <option value="">--Select Patient--</option>
+                        </select>
+                    </div>
+                    <div class="form-card">
+                        <p>Date of Visit:</p>
+                        <input type="date" id="cDate">
+                    </div>
+                    <div class="form-card">
+                        <p>Reason of Visit</p>
+                        <input type="text" id="cReason" placeholder="blurry vision, checkup, etc">
+                    </div>
+                    <div class="form-card">
+                        <p>Service Provided</p>
+                        <select id="selectService" onchange="calculateBilling()">
+                            <option value="">--Select Service--</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Row 2 -->
+                <div class="form-grid-4">
+                    <div class="form-card">
+                        <p>Senior / PWD Discount (20%):</p>
+                        <select id="cDiscount" onchange="calculateBilling()">
+                            <option value="No">No</option>
+                            <option value="Yes">Yes</option>
+                        </select>
+                    </div>
+                    <div class="form-card">
+                        <p>Total Amount Due (PHP):</p>
+                        <input type="number" id="cDue" readonly style="background-color: #E9ECEF;">
+                    </div>
+                    <div class="form-card">
+                        <p>Amount Paid (PHP):</p>
+                        <input type="number" id="cPaid" oninput="calculateBilling()" placeholder="0.00">
+                    </div>
+                    <div class="form-card">
+                        <p>Remaining Balance (PHP):</p>
+                        <input type="number" id="cBalance" readonly style="background-color: #E9ECEF;">
+                    </div>
+                </div>
+
+                <!-- Row 3 -->
+                <div class="form-grid-4">
+                    <div class="form-card">
+                        <p>Payment Method:</p>
+                        <select id="cMethod">
+                            <option value="Cash">Cash</option>
+                            <option value="GCash">GCash</option>
+                            <option value="Card">Card</option>
+                        </select>
+                    </div>
+                    <div class="form-card grid-span-2">
+                        <p>Eye Exam Findings (Optometrist Notes):</p>
+                        <input type="text" id="cFindings" placeholder="OD: -1.50, OS: -1.75 | Screening notes...">
+                    </div>
+                    <div style="align-self: flex-end; text-align: right;">
+                        <input type="button" class="btn" value="Process Consultation Billing" onclick="processConsultation()" style="padding: 12px 15px; font-size: 13px;">
+                    </div>
+                </div>
+            </form>
+        </section>
+
+        <!-- 4. RECORDS & DATABASE SECTION -->
+        <section id="recordsSection" style="display:none;">
+            <center><h2>Patient Records Database</h2></center>
+            <hr>
+            <p>Search Patient Record:
+                <input type="text" id="searchBar" placeholder="Enter Name or Patient ID" onkeyup="displayRecords()" style="max-width: 300px;">
+                <input type="button" class="btn btn-danger" value="Delete First Patient" onclick="deleteFirstPatient()">
+                <input type="button" class="btn btn-danger" value="Delete Last Patient" onclick="deleteLastPatient()">
+            </p>
+            
+            <div class="dashboard-box">
+                <h3>Summary Dashboard</h3>
+                <p id="dashboardSummary"></p>
+            </div>
+
+            <h3>Database Output</h3>
+            <p id="output"></p>
+        </section>
+
+        <!-- JAVASCRIPT LOGIC WITH LOCALSTORAGE INTEGRATION -->
+        <script type="text/javascript">
+            // ARRAYS TO HOLD DATA (LOAD FROM LOCALSTORAGE IF AVAILABLE, ELSE INITIALIZE)
+            var patients = JSON.parse(localStorage.getItem("patientsData")) || [];
+            
+            var defaultServices = [
+                { name: "Eye Check-up", cost: 500 },
+                { name: "Cataract Screening", cost: 800 },
+                { name: "Glaucoma Screening", cost: 800 },
+                { name: "Dry Eye Assessment", cost: 600 },
+                { name: "Ishihara Test", cost: 400 }
+            ];
+            var services = JSON.parse(localStorage.getItem("servicesData")) || defaultServices;
+            
+            var consultations = JSON.parse(localStorage.getItem("consultationsData")) || [];
+
+            // FUNCTION TO SAVE ARRAYS AS JSON IN LOCALSTORAGE
+            function saveToLocalStorage() {
+                localStorage.setItem("patientsData", JSON.stringify(patients));
+                localStorage.setItem("servicesData", JSON.stringify(services));
+                localStorage.setItem("consultationsData", JSON.stringify(consultations));
+            }
+
+            // NAVIGATION FUNCTION
+            function showSection(sectionId) {
+                document.getElementById("patientSection").style.display = "none";
+                document.getElementById("serviceSection").style.display = "none";
+                document.getElementById("consultSection").style.display = "none";
+                document.getElementById("recordsSection").style.display = "none";
+
+                document.getElementById(sectionId).style.display = "block";
+
+                // Refresh dropdowns & displays
+                updateDropdowns();
+                displayServices();
+                displayRecords();
+            }
+
+            // 1. ADD / EDIT PATIENT (CREATE / UPDATE)
+            function savePatient() {
+                var pId = document.getElementById("pId").value;
+                if (pId === "") {
+                    alert("Please enter Patient ID!");
+                    return;
+                }
+
+                var pName = document.getElementById("pName").value;
+                if (pName === "") {
+                    alert("Please enter Full Name!");
+                    return;
+                }
+
+                var pAge = document.getElementById("pAge").value;
+                if (pAge < 1) {
+                    alert("Please enter a valid age!");
+                    return;
+                }
+
+                var pGender = document.getElementById("pGender").value;
+                if (pGender === "") {
+                    alert("Please select gender!");
+                    return;
+                }
+
+                var pContact = document.getElementById("pContact").value;
+                if (pContact === "") {
+                    alert("Please enter contact number!");
+                    return;
+                }
+
+                var pPwd = document.getElementById("pPwd").value;
+                if (pPwd === "") {
+                    pPwd = "N/A";
+                }
+
+                var pAddress = document.getElementById("pAddress").value;
+
+                // Check if patient ID already exists
+                var existingIndex = -1;
+                for (var i = 0; i < patients.length; i++) {
+                    if (patients[i].id === pId) {
+                        existingIndex = i;
+                        break;
+                    }
+                }
+
+                var confirmed = confirm("Save record for Patient: " + pName + " (" + pId + ")?");
+                if (!confirmed) {
+                    alert("Cancelled");
+                    return;
+                }
+
+                if (existingIndex !== -1) {
+                    // Update Record
+                    patients[existingIndex].name = pName;
+                    patients[existingIndex].age = pAge;
+                    patients[existingIndex].gender = pGender;
+                    patients[existingIndex].contact = pContact;
+                    patients[existingIndex].pwd = pPwd;
+                    patients[existingIndex].address = pAddress;
+                    alert("Patient record updated successfully!");
+                } else {
+                    // Create Record (Push object to array)
+                    var newPatient = {
+                        id: pId,
+                        name: pName,
+                        age: pAge,
+                        gender: pGender,
+                        contact: pContact,
+                        pwd: pPwd,
+                        address: pAddress
+                    };
+                    patients.push(newPatient);
+                    alert("Patient registered successfully!");
+                }
+
+                // Save to LocalStorage
+                saveToLocalStorage();
+
+                // Clear input form
+                document.getElementById("pId").value = "";
+                document.getElementById("pName").value = "";
+                document.getElementById("pAge").value = "";
+                document.getElementById("pGender").value = "";
+                document.getElementById("pContact").value = "";
+                document.getElementById("pPwd").value = "";
+                document.getElementById("pAddress").value = "";
+
+                updateDropdowns();
+                displayRecords();
+            }
+
+            // 2. ADD & DISPLAY SERVICES
+            function addService() {
+                var sName = document.getElementById("sName").value;
+                var sCost = Number(document.getElementById("sCost").value);
+
+                if (sName === "") {
+                    alert("Please enter service name.");
+                    return;
+                }
+                if (sCost <= 0) {
+                    alert("Please enter a valid cost.");
+                    return;
+                }
+
+                services.push({ name: sName, cost: sCost });
+                saveToLocalStorage();
+
+                alert("New service added successfully!");
+
+                document.getElementById("sName").value = "";
+                document.getElementById("sCost").value = "";
+
+                displayServices();
+                updateDropdowns();
+            }
+
+            function displayServices() {
+                var text = "<table><tr><th>Service Name</th><th>Cost (PHP)</th></tr>";
+                for (var i = 0; i < services.length; i++) {
+                    text += "<tr><td>" + services[i].name + "</td><td>PHP " + Number(services[i].cost).toFixed(2) + "</td></tr>";
+                }
+                text += "</table>";
+                document.getElementById("serviceOutput").innerHTML = text;
+            }
+
+            // 3. CONSULTATION & BILLING PROCESS
+            function calculateBilling() {
+                var selectedServiceName = document.getElementById("selectService").value;
+                var discount = document.getElementById("cDiscount").value;
+                var paid = Number(document.getElementById("cPaid").value);
+
+                var baseCost = 0;
+                for (var i = 0; i < services.length; i++) {
+                    if (services[i].name === selectedServiceName) {
+                        baseCost = services[i].cost;
+                        break;
+                    }
+                }
+
+                var totalDue = baseCost;
+                if (discount === "Yes") {
+                    totalDue = baseCost * 0.80; // 20% discount
+                }
+
+                var balance = totalDue - paid;
+                if (balance < 0) {
+                    balance = 0;
+                }
+
+                document.getElementById("cDue").value = totalDue.toFixed(2);
+                document.getElementById("cBalance").value = balance.toFixed(2);
+            }
+
+            function processConsultation() {
+                var pId = document.getElementById("selectPatient").value;
+                if (pId === "") {
+                    alert("Please select a patient!");
+                    return;
+                }
+
+                var cDate = document.getElementById("cDate").value;
+                if (cDate === "") {
+                    alert("Please select visit date!");
+                    return;
+                }
+
+                var cReason = document.getElementById("cReason").value;
+                var cFindings = document.getElementById("cFindings").value;
+                var service = document.getElementById("selectService").value;
+                if (service === "") {
+                    alert("Please select service provided!");
+                    return;
+                }
+
+                var due = Number(document.getElementById("cDue").value);
+                var paid = Number(document.getElementById("cPaid").value);
+                var balance = Number(document.getElementById("cBalance").value);
+                var method = document.getElementById("cMethod").value;
+
+                var confirmed = confirm("Confirm Billing Process?\nTotal Due: PHP " + due + "\nPaid: PHP " + paid);
+                if (!confirmed) {
+                    alert("Cancelled");
+                    return;
+                }
+
+                var newConsultation = {
+                    pId: pId,
+                    date: cDate,
+                    reason: cReason,
+                    findings: cFindings,
+                    service: service,
+                    due: due,
+                    paid: paid,
+                    balance: balance,
+                    method: method
+                };
+
+                consultations.push(newConsultation);
+                saveToLocalStorage();
+
+                alert("Consultation and billing record saved!");
+
+                document.getElementById("cReason").value = "";
+                document.getElementById("cFindings").value = "";
+                document.getElementById("cPaid").value = "";
+                calculateBilling();
+                displayRecords();
+            }
+
+            // 4. DROPDOWNS & DATABASE RECORDS (READ, DELETE BY INDEX, SHIFT, POP)
+            function updateDropdowns() {
+                var patientSelect = document.getElementById("selectPatient");
+                patientSelect.innerHTML = "<option value=''>--Select Patient--</option>";
+                for (var i = 0; i < patients.length; i++) {
+                    patientSelect.innerHTML += "<option value='" + patients[i].id + "'>" + patients[i].id + " - " + patients[i].name + "</option>";
+                }
+
+                var serviceSelect = document.getElementById("selectService");
+                serviceSelect.innerHTML = "<option value=''>--Select Service--</option>";
+                for (var j = 0; j < services.length; j++) {
+                    serviceSelect.innerHTML += "<option value='" + services[j].name + "'>" + services[j].name + "</option>";
+                }
+            }
+
+            function displayRecords() {
+                var search = document.getElementById("searchBar").value.toLowerCase();
+                
+                // Dashboard summary
+                var totalRev = 0;
+                for (var k = 0; k < consultations.length; k++) {
+                    totalRev += Number(consultations[k].paid);
+                }
+                
+                document.getElementById("dashboardSummary").innerHTML = 
+                    "<b>Total Patients: </b>" + patients.length + "<br>" +
+                    "<b>Total Consultations: </b>" + consultations.length + "<br>" +
+                    "<b>Total Revenue Collected: </b>PHP " + totalRev.toFixed(2);
+
+                // Table Display
+                var html = "<table>" +
+                           "<tr><th>Patient Information</th><th>Consultation & Exam History</th><th>Billing History</th><th>Action</th></tr>";
+
+                var count = 0;
+                for (var i = 0; i < patients.length; i++) {
+                    var p = patients[i];
+                    if (p.id.toLowerCase().indexOf(search) !== -1 || p.name.toLowerCase().indexOf(search) !== -1) {
+                        count++;
+                        
+                        // Get patient consults
+                        var consultText = "";
+                        var billingText = "";
+                        for (var j = 0; j < consultations.length; j++) {
+                            if (consultations[j].pId === p.id) {
+                                consultText += "<b>Date:</b> " + consultations[j].date + "<br>" +
+                                               "<b>Reason:</b> " + consultations[j].reason + "<br>" +
+                                               "<b>Findings:</b> " + consultations[j].findings + "<hr>";
+
+                                billingText += "<b>Service:</b> " + consultations[j].service + "<br>" +
+                                               "<b>Due:</b> PHP " + consultations[j].due + "<br>" +
+                                               "<b>Paid:</b> PHP " + consultations[j].paid + " (" + consultations[j].method + ")<br>" +
+                                               "<b>Bal:</b> PHP " + consultations[j].balance + "<hr>";
+                            }
+                        }
+
+                        if (consultText === "") consultText = "<i>No history</i>";
+                        if (billingText === "") billingText = "<i>No billing</i>";
+
+                        html += "<tr>" +
+                                "<td>" +
+                                    "<b>ID:</b> " + p.id + "<br>" +
+                                    "<b>Name:</b> " + p.name + "<br>" +
+                                    "<b>Age/Gender:</b> " + p.age + " / " + p.gender + "<br>" +
+                                    "<b>Contact:</b> " + p.contact + "<br>" +
+                                    "<b>PWD/Senior:</b> " + p.pwd + "<br>" +
+                                    "<b>Address:</b> " + p.address +
+                                "</td>" +
+                                "<td>" + consultText + "</td>" +
+                                "<td>" + billingText + "</td>" +
+                                "<td>" +
+                                    "<input type='button' class='btn btn-edit' value='Edit' onclick='editPatientIndex(" + i + ")'><br><br>" +
+                                    "<input type='button' class='btn btn-danger' value='Delete' onclick='deletePatientIndex(" + i + ")'>" +
+                                "</td>" +
+                                "</tr>";
+                    }
+                }
+
+                if (count === 0) {
+                    html += "<tr><td colspan='4'>No patient records found.</td></tr>";
+                }
+
+                html += "</table>";
+                document.getElementById("output").innerHTML = html;
+            }
+
+            // ARRAY DELETION METHODS (UPDATED TO DELETE ASSOCIATED CONSULTATIONS)
+            function deleteFirstPatient() {
+                if (patients.length > 0) {
+                    var deleted = patients.shift();
+                    
+                    // Filter consultations to remove entries belonging to the deleted patient
+                    var newConsultations = [];
+                    for (var i = 0; i < consultations.length; i++) {
+                        if (consultations[i].pId !== deleted.id) {
+                            newConsultations.push(consultations[i]);
+                        }
+                    }
+                    consultations = newConsultations;
+
+                    saveToLocalStorage();
+                    alert("Deleted First Patient and history: " + deleted.name);
+                    displayRecords();
+                    updateDropdowns();
+                } else {
+                    alert("There is no item in the array to delete.");
+                }
+            }
+
+            function deleteLastPatient() {
+                if (patients.length > 0) {
+                    var deleted = patients.pop();
+
+                    // Filter consultations to remove entries belonging to the deleted patient
+                    var newConsultations = [];
+                    for (var i = 0; i < consultations.length; i++) {
+                        if (consultations[i].pId !== deleted.id) {
+                            newConsultations.push(consultations[i]);
+                        }
+                    }
+                    consultations = newConsultations;
+
+                    saveToLocalStorage();
+                    alert("Deleted Last Patient and history: " + deleted.name);
+                    displayRecords();
+                    updateDropdowns();
+                } else {
+                    alert("There is no item in the array to delete.");
+                }
+            }
+
+            function deletePatientIndex(index) {
+                var deletedPatient = patients[index];
+                var answer = confirm("Delete patient " + deletedPatient.name + " at Array Index " + index + "?");
+                if (answer) {
+                    // Remove patient
+                    patients.splice(index, 1);
+
+                    // Filter consultations to remove entries belonging to the deleted patient
+                    var newConsultations = [];
+                    for (var i = 0; i < consultations.length; i++) {
+                        if (consultations[i].pId !== deletedPatient.id) {
+                            newConsultations.push(consultations[i]);
+                        }
+                    }
+                    consultations = newConsultations;
+
+                    saveToLocalStorage();
+                    alert("Deleted Item and history: " + deletedPatient.name);
+                    displayRecords();
+                    updateDropdowns();
+                }
+            }
+
+            function editPatientIndex(index) {
+                var p = patients[index];
+                document.getElementById("pId").value = p.id;
+                document.getElementById("pName").value = p.name;
+                document.getElementById("pAge").value = p.age;
+                document.getElementById("pGender").value = p.gender;
+                document.getElementById("pContact").value = p.contact;
+                document.getElementById("pPwd").value = p.pwd;
+                document.getElementById("pAddress").value = p.address;
+
+                showSection('patientSection');
+            }
+
+            // AUTOMATICALLY INITIALIZE ON PAGE LOAD
+            window.onload = function() {
+                updateDropdowns();
+                displayServices();
+                displayRecords();
+            };
+        </script>
+
+    </body>
+</html>
